@@ -1,8 +1,10 @@
 #include "SFML/Graphics.hpp"
+#include "../Menu.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Coursework!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Coursework!");
+    Menu menu;
     while (window.isOpen())
     {
         sf::Event event;
@@ -12,6 +14,7 @@ int main()
                 window.close();
         }
         window.clear(sf::Color(242, 232, 201));
+        menu.draw(window);
         window.display();
     }
 	return 0;
