@@ -1,12 +1,23 @@
 #include <iostream>
 #include "Menu.h"
 
+
 Menu::Menu()
+{
+    initFonts();
+    initTitle();
+}
+
+void Menu::initFonts()
 {
     if (!titleFont.loadFromFile("fonts/title-font.otf"))
     {
-        std::cout << "Can`t load file!";
+        throw ("Could not load font file!");
     }
+}
+
+void Menu::initTitle()
+{
     title.setString("Nure Aim Trainer");
     title.setFillColor(sf::Color(0, 0, 0));
     title.setCharacterSize(60);
@@ -15,8 +26,18 @@ Menu::Menu()
     title.setPosition(sf::Vector2f(400 - width / 2, 0));
 }
 
-void Menu::draw(sf::RenderWindow& window)
+void Menu::switchState(int s)
 {
-    window.draw(title);
-    
+    state = s;
 }
+
+void Menu::render(sf::RenderTarget* target = nullptr)
+{
+    target->draw(title);
+}
+
+int const Menu::getState() const
+{
+    return state;
+}
+

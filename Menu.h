@@ -4,9 +4,16 @@ class Menu
 {
 public:
     Menu();
-    void draw(sf::RenderWindow& window);
+
+    void render(sf::RenderTarget* target);
+    int const getState() const;
 private:
+    int state = 0;
     sf::Text title;
     sf::Font titleFont;
+
+    void initFonts();
+    void initTitle();
+    void switchState(int s);
 };
 
