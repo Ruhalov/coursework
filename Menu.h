@@ -6,14 +6,20 @@ public:
     Menu();
 
     void render(sf::RenderTarget* target);
-    int const getState() const;
+    void update();
+    void posUp();
+    void posDown();
+    int getPos();
 private:
-    int state = 0;
     sf::Text title;
     sf::Font titleFont;
+    sf::Text menuText[3];
+    sf::Font menuFont;
+    int currentPos = 0;
+
 
     void initFonts();
     void initTitle();
-    void switchState(int s);
+    void initMenuText();
 };
 

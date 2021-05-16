@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Menu.h"
+#include "AimTrainer.h"
 
 class Game
 {
@@ -9,7 +10,9 @@ private:
     sf::Event event;
     sf::Clock clock;
     Menu menu;
+    AimTrainer aimTrainer;
     float deltaTime;
+    int state;
 
     //Window
     sf::RenderWindow* window;
