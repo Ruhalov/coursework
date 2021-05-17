@@ -11,7 +11,7 @@ private:
     sf::Clock clock;
     Menu menu;
     AimTrainer aimTrainer;
-    float deltaTime;
+    int deltaTime;
     int state;
 
     //Window

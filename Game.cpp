@@ -61,13 +61,14 @@ void Game::updateDeltaTime()
 {
     deltaTime = clock.getElapsedTime().asMicroseconds();
     clock.restart();
-    deltaTime /= 20;
+    deltaTime /= 2000;
 }
 
 void Game::pollEvents()
 {
     while (window->pollEvent(event))
     {
+        sf::Vector2i mousepos = sf::Mouse::getPosition(*window);
         switch (event.type)
         {
         case sf::Event::Closed:
@@ -97,9 +98,7 @@ void Game::pollEvents()
                 switch (menu.getPos())
                 {
                 case 0:
-                    std::cout << "game1";
                     state = 1;
-                    aimTrainer.start();
                     break;
                 case 1:
                     std::cout << "game2";
@@ -112,6 +111,14 @@ void Game::pollEvents()
 
             }
             break;
+        case sf::Event::MouseButtonPressed:
+            if (state == 1) 
+            {
+                aimTrainer.isStartClicked(mousepos);
+                if (aimTrainer.sat != 0)
+                    aimTrainer.isClicked(mousepos);
+            }
         }
+
     }
 }
