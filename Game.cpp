@@ -4,7 +4,7 @@
 void Game::initVariables()
 {
     window = nullptr;
-    state = 0;
+    gameState = GameStates::menu;
 }
 
 void Game::initWindow()
@@ -44,12 +44,12 @@ void Game::render()
 {
     window->clear(sf::Color(255, 202, 58));
 
-    switch (state)
+    switch (gameState)
     {
-    case 0:
+    case GameStates::menu:
         menu.render(window);
         break;
-    case 1:
+    case GameStates::aimTraine:
         aimTrainer.draw(window);
         break;
     }
@@ -75,34 +75,36 @@ void Game::pollEvents()
             window->close();
             break;
         case sf::Event::KeyPressed:
-            if (event.key.code == sf::Keyboard::Escape && state == 0)
+            if (event.key.code == sf::Keyboard::Escape && gameState == GameStates::menu)
             {
                 window->close();
                 break;
             }
-            else if (event.key.code == sf::Keyboard::Escape && state != 0)
+            else if (event.key.code == sf::Keyboard::Escape && gameState == GameStates::aimTraine)
             {
-                state = 0;
-                break;
+                aimTrainer.stop();
+                gameState = GameStates::menu;
+
             }
-            else if (event.key.code == sf::Keyboard::Up && state == 0)
+            else if (event.key.code == sf::Keyboard::Up && gameState == GameStates::menu)
             {
                 menu.posUp();
+                break;
             }
-            else if (event.key.code == sf::Keyboard::Down && state == 0)
+            else if (event.key.code == sf::Keyboard::Down && gameState == GameStates::menu)
             {
                 menu.posDown();
+                break;
             }
-            else if (event.key.code == sf::Keyboard::Return && state == 0)
+            else if (event.key.code == sf::Keyboard::Return && gameState == GameStates::menu)
             {
                 switch (menu.getPos())
                 {
                 case 0:
-                    state = 1;
+                    gameState = GameStates::aimTraine;
                     break;
                 case 1:
-                    std::cout << "game2";
-                    state = 2;
+                    gameState = GameStates::anothergame;
                     break;
                 case 2:
                     window->close();
@@ -112,10 +114,10 @@ void Game::pollEvents()
             }
             break;
         case sf::Event::MouseButtonPressed:
-            if (state == 1) 
+            if (gameState == GameStates::aimTraine) 
             {
                 aimTrainer.isStartClicked(mousepos);
-                if (aimTrainer.sat != 0)
+                if (aimTrainer.stateOfAimTrainer != aimTrainerStates::stop)
                     aimTrainer.isClicked(mousepos);
             }
         }

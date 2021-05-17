@@ -6,7 +6,9 @@ AimTrainer::AimTrainer()
     initScoreFont();
     initText();
     initCircle();
-    sat = stop;
+    initSideBar();
+    stateOfAimTrainer = aimTrainerStates::stop;
+    srand(time(NULL));
 }
 
 void AimTrainer::initCircle()
@@ -23,17 +25,12 @@ void AimTrainer::initText()
     scoreText.setFont(scoreFont);
     scoreText.setPosition(400, 400);
 
-    startStopText.setCharacterSize(40);
-    startStopText.setFillColor(sf::Color(106, 76, 147));
-    startStopText.setFont(scoreFont);
-    startStopText.setPosition(650, 550);
-    startStopText.setString("START");
-
 }
 
 void AimTrainer::draw(sf::RenderTarget *target)
 {
     target->draw(circle);
+    target->draw(sideBar);
     target->draw(startStopText);
 
     
@@ -41,7 +38,7 @@ void AimTrainer::draw(sf::RenderTarget *target)
     if (abs(randomTime.asMilliseconds() - clock.getElapsedTime().asMilliseconds()) <= 12)
     {
         circle.setFillColor(sf::Color(255, 89, 94));
-        sat = action;
+        stateOfAimTrainer = aimTrainerStates::action;
         clock.restart();
     }
     target->draw(scoreText);
@@ -50,45 +47,45 @@ void AimTrainer::draw(sf::RenderTarget *target)
 
 void AimTrainer::start()
 {
-    srand(time(NULL));
     randomTime = sf::milliseconds(3000 + rand() % 4001);
+    std::cout << "rand time " << randomTime.asMilliseconds();
+    startStopText.setString("STOP");
+    stateOfAimTrainer = aimTrainerStates::waiting;
     clock.restart();
+}
+
+void AimTrainer::stop()
+{
+    startStopText.setString("START");
+    stateOfAimTrainer = aimTrainerStates::stop;
+    circle.setFillColor(sf::Color(138, 201, 38));
+    randomTime = sf::milliseconds(0);
 }
 
 bool AimTrainer::isClicked(sf::Vector2i mpos)
 {
     float distance = hypot((mpos.x - (circle.getPosition().x + circle.getRadius())), (mpos.y - (circle.getPosition().y + circle.getRadius())));
-    if (distance <= circle.getRadius())
+    if (distance <= circle.getRadius() && stateOfAimTrainer == aimTrainerStates::action)
     {
         circle.setFillColor(sf::Color(138, 201, 38));
         scoreText.setString(std::to_string(clock.getElapsedTime().asMilliseconds()));
-        sat = waiting;
+        stateOfAimTrainer = aimTrainerStates::waiting;
         start();
+        return true;
     }
-    return true;
+    return false;
 }
 
 bool AimTrainer::isStartClicked(sf::Vector2i mpos)
 {
-    float t = startStopText.getGlobalBounds().top;
-    float l = startStopText.getGlobalBounds().left;
-    float w = startStopText.getGlobalBounds().width;
-    float h = startStopText.getGlobalBounds().height;
+    int t = startStopText.getGlobalBounds().top;
+    int l = startStopText.getGlobalBounds().left;
+    int w = startStopText.getGlobalBounds().width;
+    int h = startStopText.getGlobalBounds().height;
 
     if (sf::IntRect(l, t, w, h).contains(mpos))
     {
-        if (sat == waiting || sat == action)
-        {
-            startStopText.setString("START");
-            sat = stop;
-            randomTime = sf::milliseconds(0);
-        }
-        else
-        {
-            startStopText.setString("STOP");
-            sat = waiting;
-            start();
-        }
+        stateOfAimTrainer != aimTrainerStates::stop ? stop() : start();
         return true;
     }
     return false;

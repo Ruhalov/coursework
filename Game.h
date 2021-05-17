@@ -3,6 +3,8 @@
 #include "Menu.h"
 #include "AimTrainer.h"
 
+enum class GameStates { menu, aimTraine, anothergame};
+
 class Game
 {
 private:
@@ -12,7 +14,7 @@ private:
     Menu menu;
     AimTrainer aimTrainer;
     int deltaTime;
-    int state;
+    GameStates gameState;
 
     //Window
     sf::RenderWindow* window;

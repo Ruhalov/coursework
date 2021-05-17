@@ -1,9 +1,12 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 class Menu
 {
 public:
     Menu();
+
+    sf::Music choseMenuSound;
 
     void render(sf::RenderTarget* target);
     void update();
@@ -15,11 +18,13 @@ private:
     sf::Font titleFont;
     sf::Text menuText[3];
     sf::Font menuFont;
+    sf::Music switchMenuSound;
     int currentPos = 0;
 
 
     void initFonts();
     void initTitle();
     void initMenuText();
+    void initSounds();
 };
 

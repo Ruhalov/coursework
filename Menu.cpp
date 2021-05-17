@@ -7,23 +7,27 @@ Menu::Menu()
     initFonts();
     initTitle();
     initMenuText();
+    initSounds();
     update();
 }
 
 void Menu::posUp()
 {
     currentPos == 0 ? currentPos = 2 : --currentPos;
+    switchMenuSound.play();
     update();
 }
 
 void Menu::posDown()
 {
     currentPos++;
+    switchMenuSound.play();
     update();
 }
 
 int Menu::getPos()
 {
+    choseMenuSound.play();
     return abs(currentPos % 3);
 }
 
@@ -61,6 +65,18 @@ void Menu::initMenuText()
         menuText[i].setCharacterSize(40);
     }
     
+}
+
+void Menu::initSounds()
+{
+    if (!switchMenuSound.openFromFile("sounds/switch-sound.ogg"))
+    {
+        throw ("Could not load sound file: \"switch-sound.ogg\"");
+    }
+    if (!choseMenuSound.openFromFile("sounds/chose-sound.ogg"))
+    {
+        throw("Could not load sound file: \"sounds/chose-sound.ogg\"");
+    }
 }
 
 void Menu::render(sf::RenderTarget* target = nullptr)
