@@ -61,7 +61,7 @@ void Menu::initMenuText()
     for (int i = 0; i < 3; i++)
     {
         menuText[i].setFont(menuFont);
-        menuText[i].setCharacterSize(40);
+        menuText[i].setCharacterSize(45);
     }
     
 }
@@ -94,7 +94,7 @@ void Menu::update()
     {
         if (abs(currentPos % 3) == i)
         {
-            menuText[i].setScale(1.4, 1.4);
+            menuText[i].setScale(1.35, 1.35);
             menuText[i].setFillColor(sf::Color(106, 76, 147));
             width = menuText[i].getGlobalBounds().width;
             menuText[i].setPosition(sf::Vector2f((800 / 2) - (width) / 2, (((800 / 3) * (i + 1)) / 2) + 40));

@@ -52,8 +52,10 @@ void Game::render()
     case GameStates::aimTraine:
         aimTrainer.draw(window);
         break;
+    case GameStates::speedTraine:
+        speedTrainer.draw(window);
+        break;
     }
-
     window->display();
 }
 
@@ -85,11 +87,14 @@ void Game::pollEvents()
                 aimTrainer.stop();
                 menu.initSounds();
                 gameState = GameStates::menu;
+                break;
 
             }
-            else if (event.key.code == sf::Keyboard::Escape && gameState == GameStates::anothergame)
+            else if (event.key.code == sf::Keyboard::Escape && gameState == GameStates::speedTraine)
             {
                 gameState = GameStates::menu;
+                menu.initSounds();
+                break;
             }
             else if (event.key.code == sf::Keyboard::Up && gameState == GameStates::menu)
             {
@@ -109,22 +114,36 @@ void Game::pollEvents()
                     gameState = GameStates::aimTraine;
                     break;
                 case 1:
-                    gameState = GameStates::anothergame;
+                    gameState = GameStates::speedTraine;
                     break;
                 case 2:
                     window->close();
                     break;
                 }
-
             }
             break;
         case sf::Event::MouseButtonPressed:
             if (gameState == GameStates::aimTraine) 
             {
-                aimTrainer.isStartClicked(mousepos);
-                if (aimTrainer.getAimTrainerStates() != aimTrainerStates::stop)
+                if (aimTrainer.isStartClicked(mousepos))
+                {
+                    aimTrainer.getTrainerState() != aimTrainerStates::stop ? aimTrainer.stop() : aimTrainer.start();
+                }
+
+                if (aimTrainer.getTrainerState() != aimTrainerStates::stop)
                     aimTrainer.isClicked(mousepos);
+                break;
             }
+            else if (gameState == GameStates::speedTraine)
+            {
+                if (speedTrainer.isStartClicked(mousepos))
+                {
+                    std::cout << "clicl";
+                    speedTrainer.getTrainerState() == speedTrainerStates::stop ? speedTrainer.start() : speedTrainer.stop();
+                }
+                break;
+            }
+            break;
         }
 
     }

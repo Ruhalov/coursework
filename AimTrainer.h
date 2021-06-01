@@ -16,8 +16,7 @@ public:
     void start();
     void stop();
     bool isClicked(sf::Vector2i mpos);
-    bool isStartClicked(sf::Vector2i mpos);
-    aimTrainerStates getAimTrainerStates();
+    aimTrainerStates getTrainerState();
    
 private:
     aimTrainerStates stateOfAimTrainer;

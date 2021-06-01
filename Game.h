@@ -2,8 +2,8 @@
 #include "SFML/Graphics.hpp"
 #include "Menu.h"
 #include "AimTrainer.h"
-
-enum class GameStates { menu, aimTraine, anothergame};
+#include "SpeedTrainer.h"
+enum class GameStates { menu, aimTraine, speedTraine};
 
 class Game
 {
@@ -13,7 +13,8 @@ private:
     sf::Clock clock;
     Menu menu;
     AimTrainer aimTrainer;
-    int deltaTime;
+    SpeedTrainer speedTrainer;
+    sf::Int64 deltaTime;
     GameStates gameState;
 
     //Window

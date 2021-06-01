@@ -148,6 +148,7 @@
     <ClCompile Include="AimTrainer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="SpeedTrainer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="Trainer.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="AimTrainer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="SpeedTrainer.h" />
     <ClInclude Include="Trainer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,9 +1,10 @@
 #include <iostream>
 #include "AimTrainer.h"
+#include <string>
 
 AimTrainer::AimTrainer()
 {
-    initScoreFont();
+    initSideBarFonts();
     initText();
     initCircle();
     initSideBar();
@@ -40,8 +41,7 @@ void AimTrainer::draw(sf::RenderTarget *target)
     }
     target->draw(scoreString);
     target->draw(scoreText);
-    drawScoreVector(target);
-    
+    drawScoreVector(target);   
 }
 
 void AimTrainer::start()
@@ -70,18 +70,22 @@ bool AimTrainer::isClicked(sf::Vector2i mpos)
     {
         circle.setFillColor(sf::Color(138, 201, 38));
         scoreText.setString(std::to_string(clock.getElapsedTime().asMilliseconds()));
-        if (scoreVectorCounter < scoreVector.size() - 1)
+        std::string tmpScore = std::to_string(clock.getElapsedTime().asMilliseconds()) + " ms.";
+        if (scoreVectorCounter != scoreVector.size() - 1)
         {
-        scoreVector[scoreVectorCounter].setString((std::to_string(clock.getElapsedTime().asMilliseconds())));
-        scoreVectorCounter++;
+            scoreVector[scoreVectorCounter].setString(tmpScore);
+            scoreVectorCounter++;
         }
         else
         {
-            scoreVector[scoreVectorCounter].setString((std::to_string(clock.getElapsedTime().asMilliseconds())));
-            for (int i = 1; i < scoreVector.size() - 1; i++)
+            if (!scoreVector[scoreVectorCounter].getString().isEmpty())
             {
-                scoreVector[i -1] = scoreVector[i];
+                for (int i = 1; i < scoreVector.size(); i++)
+                {
+                    scoreVector[i - 1] = scoreVector[i];
+                }
             }
+            scoreVector[scoreVectorCounter].setString(tmpScore);
         }
         stateOfAimTrainer = aimTrainerStates::waiting;
         start();
@@ -90,22 +94,7 @@ bool AimTrainer::isClicked(sf::Vector2i mpos)
     return false;
 }
 
-bool AimTrainer::isStartClicked(sf::Vector2i mpos)
-{
-    int t = startStopText.getGlobalBounds().top;
-    int l = startStopText.getGlobalBounds().left;
-    int w = startStopText.getGlobalBounds().width;
-    int h = startStopText.getGlobalBounds().height;
-
-    if (sf::IntRect(l, t, w, h).contains(mpos))
-    {
-        stateOfAimTrainer != aimTrainerStates::stop ? stop() : start();
-        return true;
-    }
-    return false;
-}
-
-aimTrainerStates AimTrainer::getAimTrainerStates()
+aimTrainerStates AimTrainer::getTrainerState()
 {
     return stateOfAimTrainer;
 }
