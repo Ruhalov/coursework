@@ -1,4 +1,5 @@
 #include "Trainer.h"
+#include <iostream>
 
 void Trainer::initSideBarFonts()
 {
@@ -15,11 +16,12 @@ void Trainer::initSideBarFonts()
 void Trainer::initSideBar()
 {
     startStopText.setCharacterSize(60);
-    startStopText.setFillColor(sf::Color(106, 76, 147));
+    startStopText.setFillColor(sf::Color(138, 201, 38));
     startStopText.setFont(startStopFont);
     startStopText.setString("START");
     float widthStartStopText = startStopText.getGlobalBounds().width;
-    startStopText.setPosition(700 - widthStartStopText / 2, 530);
+    float heightStartStopText = startStopText.getCharacterSize();
+    startStopText.setPosition(700 - widthStartStopText / 2, 600  - 20 - heightStartStopText);
 
     sideBar.setSize(sf::Vector2f(200, 600));
     sideBar.setFillColor(sf::Color(25, 130, 196));
@@ -41,8 +43,9 @@ void Trainer::initSideBar()
 }
 void Trainer::updateSideBar()
 {
-    float w = startStopText.getGlobalBounds().width;
-    startStopText.setPosition(700 - w / 2, 530);
+    float widthStartStopText = startStopText.getGlobalBounds().width;
+    float heightStartStopText = startStopText.getCharacterSize();
+    startStopText.setPosition(700 - widthStartStopText / 2, 600 - 20 - heightStartStopText);
 }
 
 void Trainer::drawScoreVector(sf::RenderTarget*t)

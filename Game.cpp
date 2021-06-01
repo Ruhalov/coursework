@@ -92,12 +92,13 @@ void Game::pollEvents()
             }
             else if (event.key.code == sf::Keyboard::Escape && gameState == GameStates::speedTraine)
             {
+                speedTrainer.stop();
                 gameState = GameStates::menu;
-                menu.initSounds();
                 break;
             }
             else if (event.key.code == sf::Keyboard::Up && gameState == GameStates::menu)
             {
+                
                 menu.posUp();
                 break;
             }
@@ -141,6 +142,8 @@ void Game::pollEvents()
                     std::cout << "clicl";
                     speedTrainer.getTrainerState() == speedTrainerStates::stop ? speedTrainer.start() : speedTrainer.stop();
                 }
+                if (speedTrainer.getTrainerState() != speedTrainerStates::stop)
+                    speedTrainer.isClicked(mousepos);
                 break;
             }
             break;

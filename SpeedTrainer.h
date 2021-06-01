@@ -16,8 +16,12 @@ public:
     void initCircle();
     void start();
     void stop();
+    bool isClicked(sf::Vector2i mpos);
+    void initText();
     speedTrainerStates getTrainerState();
 private:
+    int iter;
     speedTrainerStates stateOfSpeedTrainer;
+    int randPos();
 };
 

@@ -21,7 +21,6 @@ private:
     sf::Music switchMenuSound;
     int currentPos = 0;
 
-
     void initFonts();
     void initTitle();
     void initMenuText();

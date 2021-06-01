@@ -12,6 +12,7 @@ Menu::Menu()
 
 void Menu::posUp()
 {
+    initSounds();
     currentPos == 0 ? currentPos = 2 : --currentPos;
     switchMenuSound.play();
     update();
@@ -19,6 +20,7 @@ void Menu::posUp()
 
 void Menu::posDown()
 {
+    initSounds();
     currentPos++;
     switchMenuSound.play();
     update();
@@ -26,6 +28,7 @@ void Menu::posDown()
 
 int Menu::getPos()
 {
+    initSounds();
     choseMenuSound.play();
     return abs(currentPos % 3);
 }
