@@ -6,18 +6,18 @@ class Menu
 public:
     Menu();
 
-    sf::Music choseMenuSound;
-
     void render(sf::RenderTarget* target);
     void update();
     void posUp();
     void posDown();
     int getPos();
+    void initSounds();
 private:
     sf::Text title;
     sf::Font titleFont;
     sf::Text menuText[3];
     sf::Font menuFont;
+    sf::Music choseMenuSound;
     sf::Music switchMenuSound;
     int currentPos = 0;
 
@@ -25,6 +25,5 @@ private:
     void initFonts();
     void initTitle();
     void initMenuText();
-    void initSounds();
 };
 

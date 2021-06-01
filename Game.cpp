@@ -83,8 +83,13 @@ void Game::pollEvents()
             else if (event.key.code == sf::Keyboard::Escape && gameState == GameStates::aimTraine)
             {
                 aimTrainer.stop();
+                menu.initSounds();
                 gameState = GameStates::menu;
 
+            }
+            else if (event.key.code == sf::Keyboard::Escape && gameState == GameStates::anothergame)
+            {
+                gameState = GameStates::menu;
             }
             else if (event.key.code == sf::Keyboard::Up && gameState == GameStates::menu)
             {
@@ -117,7 +122,7 @@ void Game::pollEvents()
             if (gameState == GameStates::aimTraine) 
             {
                 aimTrainer.isStartClicked(mousepos);
-                if (aimTrainer.stateOfAimTrainer != aimTrainerStates::stop)
+                if (aimTrainer.getAimTrainerStates() != aimTrainerStates::stop)
                     aimTrainer.isClicked(mousepos);
             }
         }

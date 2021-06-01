@@ -24,7 +24,6 @@ void AimTrainer::initText()
     scoreText.setFillColor(sf::Color(106, 76, 147));
     scoreText.setFont(scoreFont);
     scoreText.setPosition(400, 400);
-
 }
 
 void AimTrainer::draw(sf::RenderTarget *target)
@@ -33,15 +32,15 @@ void AimTrainer::draw(sf::RenderTarget *target)
     target->draw(sideBar);
     target->draw(startStopText);
 
-    
-
     if (abs(randomTime.asMilliseconds() - clock.getElapsedTime().asMilliseconds()) <= 12)
     {
         circle.setFillColor(sf::Color(255, 89, 94));
         stateOfAimTrainer = aimTrainerStates::action;
         clock.restart();
     }
+    target->draw(scoreString);
     target->draw(scoreText);
+    drawScoreVector(target);
     
 }
 
@@ -52,6 +51,7 @@ void AimTrainer::start()
     startStopText.setString("STOP");
     stateOfAimTrainer = aimTrainerStates::waiting;
     clock.restart();
+    updateSideBar();
 }
 
 void AimTrainer::stop()
@@ -60,6 +60,7 @@ void AimTrainer::stop()
     stateOfAimTrainer = aimTrainerStates::stop;
     circle.setFillColor(sf::Color(138, 201, 38));
     randomTime = sf::milliseconds(0);
+    updateSideBar();
 }
 
 bool AimTrainer::isClicked(sf::Vector2i mpos)
@@ -69,6 +70,19 @@ bool AimTrainer::isClicked(sf::Vector2i mpos)
     {
         circle.setFillColor(sf::Color(138, 201, 38));
         scoreText.setString(std::to_string(clock.getElapsedTime().asMilliseconds()));
+        if (scoreVectorCounter < scoreVector.size() - 1)
+        {
+        scoreVector[scoreVectorCounter].setString((std::to_string(clock.getElapsedTime().asMilliseconds())));
+        scoreVectorCounter++;
+        }
+        else
+        {
+            scoreVector[scoreVectorCounter].setString((std::to_string(clock.getElapsedTime().asMilliseconds())));
+            for (int i = 1; i < scoreVector.size() - 1; i++)
+            {
+                scoreVector[i -1] = scoreVector[i];
+            }
+        }
         stateOfAimTrainer = aimTrainerStates::waiting;
         start();
         return true;
@@ -89,4 +103,9 @@ bool AimTrainer::isStartClicked(sf::Vector2i mpos)
         return true;
     }
     return false;
+}
+
+aimTrainerStates AimTrainer::getAimTrainerStates()
+{
+    return stateOfAimTrainer;
 }

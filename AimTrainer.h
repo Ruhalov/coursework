@@ -17,9 +17,10 @@ public:
     void stop();
     bool isClicked(sf::Vector2i mpos);
     bool isStartClicked(sf::Vector2i mpos);
+    aimTrainerStates getAimTrainerStates();
    
-    aimTrainerStates stateOfAimTrainer;
 private:
+    aimTrainerStates stateOfAimTrainer;
     sf::Time randomTime;
     int circleState = 0;
 

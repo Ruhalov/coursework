@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Menu.h"
 
-
 Menu::Menu()
 {
     initFonts();
@@ -102,14 +101,12 @@ void Menu::update()
         }
         else
         {
-
             menuText[i].setScale(1, 1);
             menuText[i].setFillColor(sf::Color(25, 130, 196));
             width = menuText[i].getGlobalBounds().width;
             menuText[i].setPosition(sf::Vector2f((800 / 2) - (width) / 2, (((800 / 3) * (i + 1)) / 2) + 40));
         }
     }
-
 }
 
 
