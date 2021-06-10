@@ -10,7 +10,7 @@ class Game
 private:
     //Variables
     sf::Event event;
-    sf::Clock clock;
+//    sf::Clock clock;
     Menu menu;
     AimTrainer aimTrainer;
     SpeedTrainer speedTrainer;
@@ -24,6 +24,7 @@ private:
     //Private methods
     void initVariables();
     void initWindow();
+    void pollEvents();
 public:
     //Constructors / Destructors
     Game();
@@ -34,8 +35,5 @@ public:
 
     //Methods
     void update();
-    void updateDeltaTime();
-    void pollEvents();
     void render();
 };
-

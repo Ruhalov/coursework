@@ -24,9 +24,11 @@ protected:
     void updateSideBar();
     void drawScoreVector(sf::RenderTarget*t);
 private:
+    virtual bool isClicked(sf::Vector2i mpos) = 0;
     virtual void start() = 0;
     virtual void stop() = 0;
     virtual void initCircle() = 0;
     virtual void draw(sf::RenderTarget* target) = 0;
+
 };
 

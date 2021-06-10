@@ -30,7 +30,7 @@ int Menu::getPos()
 {
     initSounds();
     choseMenuSound.play();
-    return abs(currentPos % 3);
+    return abs(currentPos % menuItems);
 }
 
 void Menu::initFonts()
@@ -57,11 +57,11 @@ void Menu::initTitle()
 
 void Menu::initMenuText()
 {
-    menuText[0].setString("Game 1");
-    menuText[1].setString("Game 2");
+    menuText[0].setString("Aim Trainer");
+    menuText[1].setString("Speed Trainer");
     menuText[2].setString("Exit");
     float width;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < menuItems; i++)
     {
         menuText[i].setFont(menuFont);
         menuText[i].setCharacterSize(45);
@@ -84,7 +84,7 @@ void Menu::initSounds()
 void Menu::render(sf::RenderTarget* target = nullptr)
 {
     target->draw(title);
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < menuItems; i++)
     {
         target->draw(menuText[i]);
     }
@@ -93,9 +93,9 @@ void Menu::render(sf::RenderTarget* target = nullptr)
 void Menu::update()
 {
     float width;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < menuItems; i++)
     {
-        if (abs(currentPos % 3) == i)
+        if (abs(currentPos % menuItems) == i)
         {
             menuText[i].setScale(1.35, 1.35);
             menuText[i].setFillColor(sf::Color(106, 76, 147));

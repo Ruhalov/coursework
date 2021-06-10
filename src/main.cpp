@@ -11,7 +11,6 @@ int main()
     {
        
         //update
-        game.updateDeltaTime();
         game.update();
         
         //render

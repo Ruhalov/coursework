@@ -57,7 +57,6 @@ void Trainer::drawScoreVector(sf::RenderTarget*t)
         t->draw(scoreVector[i]);
     }
 }
-
 bool Trainer::isStartClicked(sf::Vector2i mpos)
 {
     float t = startStopText.getGlobalBounds().top;

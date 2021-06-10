@@ -1,5 +1,5 @@
 #include "Game.h"
-#include <iostream>
+
 
 void Game::initVariables()
 {
@@ -59,12 +59,7 @@ void Game::render()
     window->display();
 }
 
-void Game::updateDeltaTime()
-{
-    deltaTime = clock.getElapsedTime().asMicroseconds();
-    clock.restart();
-    deltaTime /= 2000;
-}
+
 
 void Game::pollEvents()
 {
@@ -139,7 +134,6 @@ void Game::pollEvents()
             {
                 if (speedTrainer.isStartClicked(mousepos))
                 {
-                    std::cout << "clicl";
                     speedTrainer.getTrainerState() == speedTrainerStates::stop ? speedTrainer.start() : speedTrainer.stop();
                 }
                 if (speedTrainer.getTrainerState() != speedTrainerStates::stop)

@@ -35,7 +35,6 @@ void AimTrainer::draw(sf::RenderTarget *target)
 
     if (abs(randomTime.asMilliseconds() - clock.getElapsedTime().asMilliseconds()) <= 12 && stateOfAimTrainer == aimTrainerStates::waiting)
     {
-        std::cout << "tut";
         circle.setFillColor(sf::Color(255, 89, 94));
         stateOfAimTrainer = aimTrainerStates::action;
         clock.restart();
@@ -47,7 +46,7 @@ void AimTrainer::draw(sf::RenderTarget *target)
 
 void AimTrainer::start()
 {
-    randomTime = sf::milliseconds(3000 + rand() % 4001);
+    randomTime = sf::milliseconds(2000 + rand() % 5001);
     std::cout << "rand time " << randomTime.asMilliseconds() << std::endl;
     startStopText.setString("STOP");
     startStopText.setFillColor(sf::Color(255, 89, 94));

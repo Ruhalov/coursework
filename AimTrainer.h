@@ -15,13 +15,12 @@ public:
     void draw(sf::RenderTarget *target);
     void start();
     void stop();
-    bool isClicked(sf::Vector2i mpos);
     aimTrainerStates getTrainerState();
+    bool isClicked(sf::Vector2i mpos);
    
 private:
     aimTrainerStates stateOfAimTrainer;
     sf::Time randomTime;
-    int circleState = 0;
 
     void initCircle();
     void initText();
