@@ -22,7 +22,7 @@ void SpeedTrainer::draw(sf::RenderTarget* target)
     drawScoreVector(target);
     target->draw(circle);
     if (circle.getRadius() > 0 && stateOfSpeedTrainer == speedTrainerStates::action)
-        circle.setRadius(circle.getRadius() - (iter / 30.));
+        circle.setRadius(circle.getRadius() - (iter / 40.));
     else
         stop();
 }

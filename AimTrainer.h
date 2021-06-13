@@ -1,5 +1,6 @@
 #pragma once
 #include "Trainer.h"
+#define delta 13
 
 enum class aimTrainerStates
 {

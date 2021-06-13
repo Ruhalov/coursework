@@ -33,7 +33,7 @@ void AimTrainer::draw(sf::RenderTarget *target)
     target->draw(sideBar);
     target->draw(startStopText);
 
-    if (abs(randomTime.asMilliseconds() - clock.getElapsedTime().asMilliseconds()) <= 12 && stateOfAimTrainer == aimTrainerStates::waiting)
+    if (abs(randomTime.asMilliseconds() - clock.getElapsedTime().asMilliseconds()) <= delta && stateOfAimTrainer == aimTrainerStates::waiting)
     {
         circle.setFillColor(sf::Color(255, 89, 94));
         stateOfAimTrainer = aimTrainerStates::action;
@@ -47,7 +47,6 @@ void AimTrainer::draw(sf::RenderTarget *target)
 void AimTrainer::start()
 {
     randomTime = sf::milliseconds(2000 + rand() % 5001);
-    std::cout << "rand time " << randomTime.asMilliseconds() << std::endl;
     startStopText.setString("STOP");
     startStopText.setFillColor(sf::Color(255, 89, 94));
     stateOfAimTrainer = aimTrainerStates::waiting;
@@ -71,7 +70,6 @@ bool AimTrainer::isClicked(sf::Vector2i mpos)
     if (distance <= circle.getRadius() && stateOfAimTrainer == aimTrainerStates::action)
     {
         circle.setFillColor(sf::Color(138, 201, 38));
-        std::cout << "time " << clock.getElapsedTime().asMilliseconds();
         scoreText.setString(std::to_string(clock.getElapsedTime().asMilliseconds()));
         std::string tmpScore = std::to_string(clock.getElapsedTime().asMilliseconds()) + " ms.";
         if (scoreVectorCounter != scoreVector.size() - 1)

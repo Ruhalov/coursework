@@ -16,7 +16,6 @@ protected:
     sf::Text st0, st1, st2, st3, st4;
     std::vector<sf::Text> scoreVector{st0, st1, st2, st3 ,st4};
     int scoreVectorCounter = 0;
-    sf::Text averange;
     sf::Clock clock;
 
     void initSideBarFonts();

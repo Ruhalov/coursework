@@ -9,13 +9,12 @@ class Game
 {
 private:
     //Variables
-    sf::Event event;
-//    sf::Clock clock;
     Menu menu;
     AimTrainer aimTrainer;
     SpeedTrainer speedTrainer;
-    sf::Int64 deltaTime;
     GameStates gameState;
+    sf::Event event;
+    sf::Int64 deltaTime;
 
     //Window
     sf::RenderWindow* window;
@@ -25,6 +24,8 @@ private:
     void initVariables();
     void initWindow();
     void pollEvents();
+    void presedRet();
+    //void presedKey(sf::Event e, GameStates gameState);
 public:
     //Constructors / Destructors
     Game();

@@ -47,7 +47,7 @@ void Game::render()
     switch (gameState)
     {
     case GameStates::menu:
-        menu.render(window);
+        menu.draw(window);
         break;
     case GameStates::aimTraine:
         aimTrainer.draw(window);
@@ -58,7 +58,21 @@ void Game::render()
     }
     window->display();
 }
-
+void Game::presedRet()
+{
+    switch (menu.getPos())
+    {
+    case 0:
+        gameState = GameStates::aimTraine;
+        break;
+    case 1:
+        gameState = GameStates::speedTraine;
+        break;
+    case 2:
+        window->close();
+        break;
+    }
+}
 
 
 void Game::pollEvents()
@@ -93,7 +107,6 @@ void Game::pollEvents()
             }
             else if (event.key.code == sf::Keyboard::Up && gameState == GameStates::menu)
             {
-                
                 menu.posUp();
                 break;
             }
@@ -104,20 +117,9 @@ void Game::pollEvents()
             }
             else if (event.key.code == sf::Keyboard::Return && gameState == GameStates::menu)
             {
-                switch (menu.getPos())
-                {
-                case 0:
-                    gameState = GameStates::aimTraine;
-                    break;
-                case 1:
-                    gameState = GameStates::speedTraine;
-                    break;
-                case 2:
-                    window->close();
-                    break;
-                }
+                presedRet();
+                break;
             }
-            break;
         case sf::Event::MouseButtonPressed:
             if (gameState == GameStates::aimTraine) 
             {

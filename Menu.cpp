@@ -81,7 +81,7 @@ void Menu::initSounds()
     }
 }
 
-void Menu::render(sf::RenderTarget* target = nullptr)
+void Menu::draw(sf::RenderTarget* target = nullptr)
 {
     target->draw(title);
     for (int i = 0; i < menuItems; i++)

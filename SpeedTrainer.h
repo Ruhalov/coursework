@@ -1,6 +1,7 @@
 #pragma once
 #include "Trainer.h"
 
+
 enum class speedTrainerStates
 {
     stop, action

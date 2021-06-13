@@ -8,7 +8,7 @@ class Menu
 public:
     Menu();
 
-    void render(sf::RenderTarget* target);
+    void draw(sf::RenderTarget* target);
     void update();
     void posUp();
     void posDown();
